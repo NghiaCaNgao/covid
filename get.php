@@ -1,7 +1,8 @@
 <?php
 date_default_timezone_set("Asia/Bangkok");
 
-$now = (string)floor(((int)date("H"))/3)*3;
+$period = 1;
+$now = (string)floor(((int)date("H"))/$period)*$period;
 $fileName = $now.date("dmY");
 $fileName = "./data/".$fileName.".txt";
 
