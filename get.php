@@ -4,6 +4,7 @@ date_default_timezone_set("Asia/Bangkok");
 $now = (string)floor(((int)date("H"))/3)*3;
 $fileName = $now.date("dmY");
 $fileName = "./data/".$fileName.".txt";
+
 if (!file_exists($fileName)) {
     $curl = curl_init();
     curl_setopt_array($curl, array(
@@ -14,7 +15,7 @@ if (!file_exists($fileName)) {
     ));
     
     $resp = curl_exec($curl);
-    var_dump($resp);
+    echo($resp);
     curl_close($curl);
     
     $myfile = fopen($fileName, "w") or die("Unable to open file!");

@@ -409,7 +409,33 @@ search.addEventListener("click", function() {
     this.value = "";
 })
 search.addEventListener("keypress", function(key) {
-    if (key.code === "Enter") {
+    if (search.val != "") {
+        if (key.code === "Enter" || key.code === "Ok") {
+            let text = search.value;
+            if (isNaN(Number(text)) == 0) {
+                let stt = Number(text);
+                if (stt > 0 && stt <= covid.length) {
+                    let e = document.getElementById(`${findCountryByRank(getSortType(),stt)}`);
+                    e.scrollIntoView();
+                } else {
+                    alert("Số stt không hợp lệ")
+                }
+            } else {
+                let id = trim(change_alias(search.value));
+                let locate = findCountryByName(id);
+                if (locate == void 0) {
+                    alert('Không tìm thấy quốc gia này: ' + search.value);
+                } else {
+                    let e = document.getElementById(`${locate}`);
+                    e.scrollIntoView();
+                }
+            }
+        }
+    }
+
+});
+search.addEventListener("change", function() {
+    if (search.val != "") {
         let text = search.value;
         if (isNaN(Number(text)) == 0) {
             let stt = Number(text);
@@ -430,7 +456,7 @@ search.addEventListener("keypress", function(key) {
             }
         }
     }
-});
+})
 
 async function init() {
     await getData();
